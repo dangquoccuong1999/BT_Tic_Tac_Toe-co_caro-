@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1 style="margin-left: 800px; color: red">Cờ Caro</h1>
+<button style="margin-left: 800px ; width: 100px; height: 50px;" onclick="playX()">Đánh X</button>
+<button style="width: 100px; height: 50px;" onclick="playO()">Đánh O</button>
+<div id="table" style="margin-left: 600px; margin-top: 50px"></div>
+
+<script>
+    let arr = [];
+    let board = "<table border='1' cellpadding=' 10' cellspacing='0' width='500px'>";
+    for (let i = 0; i <= 10; i++) {
+        board += "<tr>";
+        arr[i] = [];
+        for (let j = 0; j <= 10; j++) {
+            board += "<td>"
+            arr[i][j] = '.';
+            board += arr[i][j] + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp";
+            board += '</td>';
+        }
+        board += '</tr>';
+    }
+    board += '</table>';
+    document.getElementById('table').innerHTML = board;
+
+    function playX() {
+        let a = Number(prompt('Mời bạn nhập vị trí hàng thứ:'));
+        let b = Number(prompt('Mời bạn nhập vị trí cột thứ:'));
+        arr[a][b] = "x";
+        
+        let board = "<table border='1' cellpadding=' 10' cellspacing='0' width='500px'>";
+        // ghi đè lên hàng và cột
+        for (let i = 0; i < arr.length; i++) {
+            board += "<tr>";
+            for (let j = 0; j < arr[i].length; j++) {
+                board += "<td>";
+                board += arr[i][j] + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp";
+                board += '</td>';
+            }
+            board += '</tr>';
+        }
+        board += '</table>';
+        document.getElementById('table').innerHTML = board;
+        console.log(board)
+        check();
+    }
+
+    function playO() {
+        let a = Number(prompt('Mời bạn nhập vị trí hàng thứ:'));
+        let b = Number(prompt('Mời bạn nhập vị trí cột thứ:'));
+        arr[a][b] = "O";
+        let board = "<table border='1' cellpadding=' 10' cellspacing='0' width='500px'>";
+        // ghi đè lên hàng
+        for (let i = 0; i < arr.length; i++) {
+            board += "<tr>";
+            for (let j = 0; j < arr[i].length; j++) {
+                board += "<td>";
+                board += arr[i][j] + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp";
+                board += '</td>';
+            }
+            board += '</tr>';
+        }
+        board += '</table>';
+        document.getElementById('table').innerHTML = board;
+        check();
+
+    }
+
+    function check() {
+        // xét cột chéo
+        for (let i = 0; i < arr.length; i++) {
+            for (let j = 0; j < arr[i].length; j++) {
+                if (arr[i][j] == "x" && arr[i + 1][j + 1] == "x" && arr[i + 2][j + 2] == "x") {
+                    alert('Bạn đã chiến thắng !');
+                }
+            }
+        }
+
+        // xét cột ngang
+        for (let i = 0; i < arr.length; i++) {
+            for (let j = 0; j < arr[i].length; j++) {
+                if (arr[i][j] == "x" && arr[i][j + 1] == "x" && arr[i][j + 2] == "x") {
+                    alert('Bạn đã chiến thắng !');
+                }
+            }
+        }
+        // Xét cột dọc
+        for (let i = 0; i < arr.length; i++) {
+            for (let j = 0; j < arr[i].length; j++) {
+                if (arr[i][j] == "x" && arr[i + 1][j] == "x" && arr[i + 2][j] == "x") {
+                    alert('Bạn đã chiến thắng !');
+                }
+            }
+        }
+
+    }
+
+
+</script>
+</body>
+</html>
